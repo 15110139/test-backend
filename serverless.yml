@@ -1,0 +1,21 @@
+service: sls-test-backend
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: eu-west-3
+  lambdaHashingVersion: 20201221
+
+plugins:
+  - serverless-offline
+
+functions:
+  index:
+    handler: dist/index.handler
+    events:
+      - http:
+          path: '/'
+          method: any
+      - http:
+          path: '{proxy+}'
+          method: any
